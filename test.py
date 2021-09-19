@@ -2,12 +2,14 @@
 from dataset import *
 import config
 
-epochs=config.max_epoch
-train_batch_size=config.train_batch_size
-data_path=config.data_path
+class test:
+  def __init__(self, model, config):
+    self.epochs=config.max_epoch
+    self.train_batch_size=config.train_batch_size
+    self.data_path=config.data_path
 
 
-dataset = Dataset(data_path=data_path)
-data_loader = Data_loader(dataset,num_workers=num_workers,batch_size=train_batch_size,shuffle=shuffle)
+    self.dataset = Dataset(data_path=data_path)
+    self.data_loader = Data_loader(dataset,num_workers=num_workers,batch_size=train_batch_size,shuffle=shuffle)
 
-test(epochs=epochs, model=model, train_loader=train_loader, val_loader=val_loader, criterion=criterion, optimizer=optimizer, scheduler=scheduler, checkpoint_path, best_model_path)
+  test(epochs=self.epochs, model=model, train_loader=train_loader, val_loader=val_loader, criterion=self.criterion, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
