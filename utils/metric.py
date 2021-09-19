@@ -27,5 +27,3 @@ def metrics(outputs, labels, num_classes, train = False):
         return iou, accu
     else: 
         return np_outputs.squeeze(), iou, accu
-
-
