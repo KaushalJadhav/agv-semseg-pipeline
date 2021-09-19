@@ -51,3 +51,20 @@ class CityScapesCutMix(Dataset):
 
     return len(self.data)
 
+def get_loader(dataset):
+  
+  """
+  Args:
+  dataset (Dataset): Custom Dataset class
+  Returns:
+  DataLoader: Dataloader for training or testing
+  """
+
+  params = {
+  'batch_size': config.batch_size,
+  'num_workers': config.num_workers,
+  'shuffle': True
+  }
+
+  dataloader = DataLoader(dataset, **params)
+  return dataloader
