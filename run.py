@@ -1,8 +1,20 @@
 import train, test
-
+from utils.config import process_config
 
 def main():
-    python3 run.py --config config.json 
+    arg_parser = argparse.ArgumentParser(description="")
+    arg_parser.add_argument(
+        'config',
+        metavar='config_json_file',
+        default='None',
+        help='The Configuration file in json format')
+
+    args = arg_parser.parse_args()
+
+    # Parse the config json file
+    config = process_config(args.config)
+
+    
 
 
 
