@@ -1,8 +1,8 @@
 import train, test
 
 
-def main: 
-
+def main():
+    python3 run.py --config config.json 
 
 
 
