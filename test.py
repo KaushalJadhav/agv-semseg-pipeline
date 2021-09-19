@@ -14,3 +14,4 @@ class test:
     self.data_loader = Data_loader(dataset,num_workers=num_workers,batch_size=train_batch_size,shuffle=shuffle)
 
   test(epochs=self.epochs, model=model, train_loader=train_loader, val_loader=val_loader, criterion=self.criterion, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
+
