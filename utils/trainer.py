@@ -4,9 +4,9 @@ from dataloader.cityscapes import CityScapesDataLoader
 import torch.nn.functional as F
                                                
 class Trainer():
-    def __init__(self, config, model):
+    def __init__(self, model):
         self.model = model
-    def evaluate(model, val_loader, criterion, num_classes, idx_val):
+    def evaluate(model, val_loader, criterion, config.num_classes, idx_val):
     
     self.model.eval()
     val_loss = 0.0    
@@ -29,14 +29,14 @@ class Trainer():
     return val_loss / len(val_loader)
         
 
-    def fit(epochs, model, train_loader, val_loader, criterion, optimizer, scheduler, num_classes, checkpoint_path, best_model_path):
+    def fit(config.epochs, model, train_loader, val_loader, criterion, optimizer, scheduler, config.num_classes, checkpoint_path, best_model_path):
 
         idx_train = 1
         idx_val = 1
 
         val_loss_min = 9.9
 
-        for epoch in range(epochs):
+        for epoch in range(config.epochs):
 
             self.model.train()
             train_loss = 0.0
@@ -62,7 +62,7 @@ class Trainer():
 
             scheduler.step()
 
-            val_loss = evaluate(model, val_loader, criterion, num_classes, idx_val)
+            val_loss = evaluate(model, val_loader, criterion, config.num_classes, idx_val)
             idx_val += len(val_DataLoader)
             train_loss = train_loss / len(train_loader)
 
