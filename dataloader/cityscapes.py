@@ -36,7 +36,14 @@ class CityScapesDataLoader():
         self.train_dataloader
         self.valid_dataloader
     
-    def get_loader(config, dataset):
+    def get_loader(dataset):
+      
+      """
+      Args:
+        dataset (Dataset): Custom Dataset class
+      Returns:
+        DataLoader: Dataloader for training or testing
+      """
 
       params = {
       'batch_size': config.batch_size,
