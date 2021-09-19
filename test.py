@@ -9,8 +9,8 @@ import torch
 import numpy as np 
 import torch
 
-#This will call trainer.py which is just the basic function. All the arguements like optimizer, scheduler etc will be provided from here to trainer.
-# we need to make this test.py in class so that we can it from run.py
+#This will call tester.py which is just the basic function. All the arguements like optimizer, scheduler etc will be provided from here to tester.
+# we need to make this test.py in class so that we can call it from run.py
 #copied most stuff from train.py mradul made and made some minor changes to it
 
 class test:
