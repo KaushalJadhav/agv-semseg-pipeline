@@ -1,20 +1,21 @@
 from ENets.enet import ENet
 from dataloader.cityscapes import CityScapesDataLoader
-
+import metrics
+import numpy as np 
 import torch.nn.functional as F
 
     
 class Tester():
     def __init__(self):
         pass
-    def final_metrics(self,num_classes):
+    def final_metrics(self,config.num_classes):
      ENet.eval()
     
-     train_accuracy = np.zeros((num_classes,), dtype=float)
-     train_iou = np.zeros((num_classes,), dtype=float)
+     train_accuracy = np.zeros((config.num_classes,), dtype=float)
+     train_iou = np.zeros((config.num_classes,), dtype=float)
     
-     val_accuracy = np.zeros((num_classes,), dtype=float)
-     val_iou = np.zeros((num_classes,), dtype=float)
+     val_accuracy = np.zeros((config.num_classes,), dtype=float)
+     val_iou = np.zeros((config.num_classes,), dtype=float)
 
      val_results = []
       
@@ -25,7 +26,7 @@ class Tester():
         
          outputs = ENet(inputs)
 
-         iou, accu = metrics(outputs, labels, num_classes, True)
+         iou, accu = metrics(outputs, labels, config.num_classes, True)
         
          train_accuracy += accu
          train_iou += iou
@@ -37,7 +38,7 @@ class Tester():
 
          outputs = ENet(inputs)
         
-         np_outputs, iou, accu = metrics(outputs, labels, num_classes)
+         np_outputs, iou, accu = metrics(outputs, labels, config.num_classes)
         
          val_accuracy += accu
          val_iou += iou
