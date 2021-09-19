@@ -1,3 +1,5 @@
+import torch.nn.functional as F
+
 def fit(epochs, model, train_loader, val_loader, criterion, optimizer, scheduler, num_classes, checkpoint_path, best_model_path):
 
     idx_train = 1
