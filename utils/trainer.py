@@ -19,7 +19,7 @@ def evaluate(model, val_loader, criterion, num_classes, idx_val):
         
         val_loss += loss.item()
         
-        wandb.log({'Batch Loss/Val': loss, 'idx_val': idx_val})
+        #wandb.log({'Batch Loss/Val': loss, 'idx_val': idx_val})
         
         idx_val += 1
         
