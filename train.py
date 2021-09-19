@@ -39,7 +39,7 @@ class ENet():
         self.loss = self.loss.to(self.device)
 
     def train(self):
-        pass
+        fit(epochs, model, train_loader, val_loader, criterion, optimizer, scheduler, num_classes, checkpoint_path, best_model_path)
 
 
     def validate(self):
