@@ -30,26 +30,21 @@ class CityScapes(Dataset):
 
     return len(self.data)
 
-class CityScapesDataLoader():
-    def __init__(self, config):
-        self.config = config
-        self.train_dataloader
-        self.valid_dataloader
-    
-    def get_loader(dataset):
-      
-      """
-      Args:
-        dataset (Dataset): Custom Dataset class
-      Returns:
-        DataLoader: Dataloader for training or testing
-      """
 
-      params = {
-      'batch_size': config.batch_size,
-      'num_workers': config.num_workers,
-      'shuffle': True
-      }
+def get_loader(dataset):
+  
+  """
+  Args:
+  dataset (Dataset): Custom Dataset class
+  Returns:
+  DataLoader: Dataloader for training or testing
+  """
 
-      dataloader = DataLoader(dataset, **params)
-      return dataloader
+  params = {
+  'batch_size': config.batch_size,
+  'num_workers': config.num_workers,
+  'shuffle': True
+  }
+
+  dataloader = DataLoader(dataset, **params)
+  return dataloader
