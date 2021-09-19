@@ -24,10 +24,10 @@
     "max_epoch": 20,
     "encoder_relu": false,
     "decoder_relu": true,
-    "valid_split": 0.2
-    "train_X_path": "xyz"
-    "train_y_path": "xyz"
-    "val_X_path": "xyz"
-    "val_y_path": "xyz"
+    "valid_split": 0.2,
+    "train_X_path": "xyz",
+    "train_y_path": "xyz",
+    "val_X_path": "xyz",
+    "val_y_path": "xyz",
     "test_X_path": "xyz"
   }

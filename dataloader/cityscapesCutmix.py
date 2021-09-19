@@ -76,7 +76,7 @@ def get_data_array(train_data_path, val_data_path, test_data_path = None):
   val_X = np.load(val_X_path)
   val_y = np.load(val_Y_path)
   test_X = None
-  if test_X_path
+  if test_X_path:
     test_x = np.load(test_X_path)
   return train_X, train_y, val_X, val_y, test_X
 

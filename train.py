@@ -6,7 +6,7 @@ from dataloader.cityscapes import CityScapesDataLoader, load_data, get_data_arra
 
 import torch 
 import numpy as np 
-import torch.
+import torch 
 
 epochs=config.max_epoch
 train_batch_size=config.train_batch_size
@@ -48,13 +48,16 @@ class ENet():
         self.loss = self.loss.to(self.device)
 
     def train(self):
+        pass
 
 
     def validate(self):
+        pass
 
 
 
     def finalize(self):
+        pass
 
 
     
