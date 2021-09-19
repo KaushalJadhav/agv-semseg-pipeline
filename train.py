@@ -2,7 +2,7 @@ from utils.losses import CrossEntropyLoss
 from utils.device import default_device
 
 from models.enet import ENet
-from dataloader.preprocessing import encode_data
+from utils.preprocessing import encode_data
 from dataloader.cityscapes import CityScapes, load_data, get_data_array, get_data
 from dataloader.cityscapesCutmix import CityScapesCutmix, load_data, get_data_array, get_data
 
