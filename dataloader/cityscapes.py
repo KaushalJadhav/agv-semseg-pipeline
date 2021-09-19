@@ -30,3 +30,9 @@ class CityScapes(Dataset):
 
     return len(self.data)
 
+class CityScapesDataLoader():
+    def __init__(self, config):
+        self.config = config
+        self.train_dataloader
+        self.valid_dataloader
+

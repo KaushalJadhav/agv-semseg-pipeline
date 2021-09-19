@@ -1,3 +1,6 @@
+from models.enet import ENet
+from dataloader.cityscapes import CityScapesDataLoader
+
 import torch.nn.functional as F
 
 def evaluate(model, val_loader, criterion, num_classes, idx_val):
@@ -87,3 +90,7 @@ def fit(epochs, model, train_loader, val_loader, criterion, optimizer, scheduler
     # return trained model
     return model
                                                   
+
+
+class Trainer():
+    def __init__(self):
