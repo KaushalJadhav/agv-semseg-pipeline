@@ -4,14 +4,8 @@ from dataloader.cityscapes import CityScapesDataLoader
 import torch.nn.functional as F
                                                
 class Trainer():
-    def __init__(self, model, data_loader, optimizer, criterion, metric, device,scheduler):
+    def __init__(self, config, model):
         self.model = model
-        self.data_loader = data_loader
-        self.optimizer = optim
-        self.criterion = criterion
-        self.metric = metric
-        self.device = device
-        self.scheduler = scheduler
     def evaluate(model, val_loader, criterion, num_classes, idx_val):
     
     self.model.eval()
@@ -24,7 +18,7 @@ class Trainer():
 
         outputs = self.model(inputs)
         
-        loss = self.criterion(outputs, labels)
+        loss = criterion(outputs, labels)
         
         val_loss += loss.item()
         
@@ -54,11 +48,11 @@ class Trainer():
 
                 outputs = self.model(inputs)
 
-                loss = self.criterion(outputs, labels)
+                loss = criterion(outputs, labels)
 
-                self.optimizer.zero_grad()
+                optimizer.zero_grad()
                 loss.backward()
-                self.optimizer.step()
+                optimizer.step()
 
                 train_loss += loss.item()
 
@@ -66,7 +60,7 @@ class Trainer():
 
                 idx_train += 1
 
-            self.scheduler.step()
+            scheduler.step()
 
             val_loss = evaluate(model, val_loader, criterion, num_classes, idx_val)
             idx_val += len(val_DataLoader)
