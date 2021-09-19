@@ -1,7 +1,8 @@
 
 from dataset import *
-import config
 
+//This will call trainer.py which is just the basic function. All the arguements like ptimizer, scheduler etc will be provided from here to trainer.
+// we need to make this train.py in class so that we can it from run.py
 class test:
   def __init__(self, model, config):
     self.epochs=config.max_epoch
