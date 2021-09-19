@@ -9,7 +9,7 @@ from dataloader.cityscapesCutmix import CityScapesCutmix, load_data, get_data_ar
 
 import torch 
 import numpy as np 
-import torch 
+
 
 epochs=config.max_epoch
 train_batch_size=config.train_batch_size
