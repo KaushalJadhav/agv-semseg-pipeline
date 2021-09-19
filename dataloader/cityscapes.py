@@ -35,4 +35,14 @@ class CityScapesDataLoader():
         self.config = config
         self.train_dataloader
         self.valid_dataloader
+    
+    def get_loader(config, dataset):
 
+      params = {
+      'batch_size': config.batch_size,
+      'num_workers': config.num_workers,
+      'shuffle': True
+      }
+
+      dataloader = DataLoader(dataset, **params)
+      return dataloader
