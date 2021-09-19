@@ -34,6 +34,6 @@ def load_ckp(checkpoint_fpath, model, optimizer):
     # return model, optimizer, epoch value, min validation loss 
     return model, checkpoint['epoch'], valid_loss_min, optimizer
 
-def make_dict(model,optim,epoch,loss,accuracy,iou,wandb_run,artifact_name):
+def make_dict(model,optim,epoch,loss,accuracy,iou):
     state = {'epoch':epoch,'model':model.state_dict(),'optimizer': optim.state_dict(),'loss':loss,'accuracy':accuracy,'iou':iou}
     return state
