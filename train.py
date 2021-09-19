@@ -2,8 +2,10 @@ from utils.losses import CrossEntropyLoss
 from utils.device import default_device
 
 from models.enet import ENet
+from dataloader.preprocessing import encode_data
 from dataloader.cityscapes import CityScapes, load_data, get_data_array, get_data
 from dataloader.cityscapesCutmix import CityScapesCutmix, load_data, get_data_array, get_data
+
 
 import torch 
 import numpy as np 
@@ -13,8 +15,8 @@ epochs=config.max_epoch
 train_batch_size=config.train_batch_size
 
 train_X, train_y, val_X, val_y, test_X = get_data_array(config["train_X_path"], config["train_y_path"], config["val_X_path"], config["val_y_path"], config["test_X_path"])
-#Add preprocessing here
-train_data, val_data = get_data(train_X, train_y, val_X, val_y)
+train_y_encoded, val_y_encoded = encode_data(train_y, val_y)
+train_data, val_data = get_data(train_X, train_y_encoded, val_X, val_y_encoded)
 train_loader, val_loader = load_data(train_data, val_data)
 
 
