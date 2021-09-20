@@ -33,12 +33,14 @@ def main():
     # validate()
     # finalize()
 
-
-    # Create an train class instance and call thier methods like this 
-    agent = ENetTrainAgent(config)
-    agent.train()
-    agent.finalize()
-
+    #Check the mode
+    if config.mode=="train":
+        # Create an train class instance and call thier methods like this 
+        agent = ENetTrainAgent(config)
+        agent.train()
+        agent.finalize()
+    if config.mode=="test":
+        agent = ENetTestAgent(config)
 
 
     
