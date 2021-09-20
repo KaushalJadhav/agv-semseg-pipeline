@@ -7,7 +7,7 @@
 # from train import train, validate, finalize
 # Do not call any other method or class in run.py 
 
-from train import ENetTrainAgent
+from train import Train 
 from test import ENetTestAgent
 
 def main():
@@ -35,12 +35,14 @@ def main():
 
     #Check the mode
     if config.mode=="train":
-        # Create an train class instance and call thier methods like this 
-        agent = ENetTrainAgent(config)
-        agent.train()
-        agent.finalize()
+        # Create a train class instance and call thier methods like this 
+        agent = Train(config)
+        agent.forward()
     if config.mode=="test":
-        agent = ENetTestAgent(config)
+        agent = Test(config)
+        agent.forward()
+    else: 
+        print("Invalid mode provided!")
 
 
     

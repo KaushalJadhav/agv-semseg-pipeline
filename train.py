@@ -26,8 +26,8 @@ class Train():
         self.scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optimizer,
                                                                 gamma=self.config.gamma)
 
-        self.valid_dataloader = self.dataloader.valid_dataloader
-        self.train_dataloader = self.dataloader.train_datalaoder
+        self.valid_dataloader = self.dataloader.valid_loader
+        self.train_dataloader = self.dataloader.train_loader
 
         self.current_epoch = 1
 
@@ -37,7 +37,7 @@ class Train():
 
     def forward(self):
 
-        trainer(epochs=self.epochs, model=self.model, train_loader=self.train_dataloader, val_loader=self.val_dataloader, criterion=self.loss, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
+        trainer(epochs=self.epochs, model=self.model, train_loader=self.train_dataloader, val_loader=self.valid_dataloader, criterion=self.loss, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
         #Here still we have to fix the path to where we log the data
 
 

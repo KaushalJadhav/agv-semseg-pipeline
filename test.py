@@ -13,7 +13,7 @@ import torch
 # we need to make this test.py in class so that we can call it from run.py
 #copied most stuff from train.py mradul made and made some minor changes to it
 
-class ENetTestAgent:
+class Test:
     def __init__(self, config):
         self.config = config
         self.model = ENet(self.config)
@@ -27,8 +27,7 @@ class ENetTestAgent:
         self.scheduler = torch.optim.lr_scheduler.ExponentialLR(self.optimizer,
                                                                 gamma=self.config.gamma)
 
-        self.valid_dataloader = self.dataloader.valid_dataloader
-        self.train_dataloader = self.dataloader.valid_datalaoder
+        self.test_dataloader = self.dataloader.test_loader
 
         self.current_epoch = 1
 
@@ -37,11 +36,5 @@ class ENetTestAgent:
         self.model = self.model.to(self.device)
         self.loss = self.loss.to(self.device)
 
-    def train(self):
-      test(epochs=self.epochs, model=model, train_loader=train_loader, val_loader=val_loader, criterion=self.criterion, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
-
-    def validate(self):
-
-
-
-    def finalize(self): 
+    def forward(self):
+      tester(epochs=self.epochs, model=self.model, train_loader=self.train_loader, val_loader=self.valid_loader, criterion=self.criterion, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
