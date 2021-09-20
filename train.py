@@ -1,4 +1,7 @@
-from dataset import *
+from dataloader.cityscapes import CityScapesDataLoader
+from dataloader.cityscapes_cutmix import CityScapesCutmixDataLoader
+# Call dataloader class from dataloader package and initialize them wherever needed ~mradul2
+
 import torch.optim as optim
 import torch.nn as nn          #We wll make this modular by adding these either to config
 
@@ -24,7 +27,7 @@ class Train():
                                                                 gamma=self.config.gamma)
 
         self.valid_dataloader = self.dataloader.valid_dataloader
-        self.train_dataloader = self.dataloader.valid_datalaoder
+        self.train_dataloader = self.dataloader.train_datalaoder
 
         self.current_epoch = 1
 
