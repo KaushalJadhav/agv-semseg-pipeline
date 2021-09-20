@@ -4,7 +4,7 @@ import metrics
 import numpy as np 
 import torch.nn.functional as F
 
-def final_metrics(self,config.num_classes):
+def final_metrics(config.num_classes):
     ENet.eval()
     
     train_accuracy = np.zeros((config.num_classes,), dtype=float)
