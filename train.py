@@ -6,15 +6,15 @@ import torch
 import numpy as np 
 
 
-epochs=config.max_epoch
-train_batch_size=config.train_batch_size
+# epochs=config.max_epoch
+# train_batch_size=config.train_batch_size
 
 
-trainer(epochs=epochs, model=model, train_loader=train_loader, val_loader=val_loader, criterion=criterion, optimizer=optimizer, scheduler=scheduler, checkpoint_path, best_model_path)
+# trainer(epochs=epochs, model=model, train_loader=train_loader, val_loader=val_loader, criterion=criterion, optimizer=optimizer, scheduler=scheduler, checkpoint_path, best_model_path)
 
 
 
-class ENet():
+class ENetAgent():
     def __init__(self, config):
         self.config = config
         self.model = ENet(self.config)

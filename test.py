@@ -13,7 +13,7 @@ import torch
 # we need to make this test.py in class so that we can call it from run.py
 #copied most stuff from train.py mradul made and made some minor changes to it
 
-class test:
+class ENetTestAgent:
     def __init__(self, config):
         self.config = config
         self.model = ENet(self.config)
