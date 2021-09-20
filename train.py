@@ -9,7 +9,7 @@ import numpy as np
 
 #wandb 
 
-class ENet():
+class Train():
     def __init__(self, config):
         self.config = config
         self.model = ENet(self.config)
@@ -32,7 +32,7 @@ class ENet():
         self.model = self.model.to(self.device)
         self.loss = self.loss.to(self.device)
 
-    def train(self):
+    def forward(self):
         train_dataset = Dataset(data_path=train_data_path)
         val_dataset   = Dataset(data_path=val_data_path)
 
