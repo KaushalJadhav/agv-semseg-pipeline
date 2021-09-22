@@ -1,6 +1,7 @@
 # AGV DL Segmentation Pipeline
 
 ## Structure
+TODO #1
 
 ```bash
 ├── directory 
@@ -13,8 +14,10 @@
 └── run.py              
 ```
 
+
 ## Usage
 
 ```bash
-python3 run.py [--OPTIONS]
+python3 run.py [-h] [--config CONFIG_FILE] [--mode MODE]
+                    [--wandb_id "WANDB_API_KEY"]
 ```

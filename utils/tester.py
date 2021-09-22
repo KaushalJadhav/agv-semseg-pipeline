@@ -7,6 +7,8 @@ import numpy as np
 def final_metrics(config, model, train_loader, valid_loader, device):
     model.eval()
     
+    val_results = []
+
     train_accuracy = np.zeros((config.num_classes,), dtype=float)
     train_iou = np.zeros((config.num_classes,), dtype=float)
     
@@ -20,7 +22,7 @@ def final_metrics(config, model, train_loader, valid_loader, device):
         
         outputs = model(inputs)
 
-        iou, accu = iou_accu(config, outputs, labels)
+        np_outputs, iou, accu = iou_accu(config, outputs, labels)
         
         train_accuracy += accu
         train_iou += iou
@@ -33,6 +35,7 @@ def final_metrics(config, model, train_loader, valid_loader, device):
         outputs = model(inputs)
         
         np_outputs, iou, accu = iou_accu(config, outputs, labels)
+        val_result.append(np_outputs)
         
         val_accuracy += accu
         val_iou += iou
@@ -45,4 +48,4 @@ def final_metrics(config, model, train_loader, valid_loader, device):
 
     val_results = np.array(val_results)
 
-    return train_accuracy, val_accuracy, train_iou, val_iou
+    return train_accuracy, val_accuracy, train_iou, val_iou, val_results 

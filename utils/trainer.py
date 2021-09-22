@@ -1,89 +1,41 @@
 import torch.nn.functional as F
 
-def fit(epochs, model, train_loader, val_loader, criterion, optimizer, scheduler, num_classes, checkpoint_path, best_model_path):
+def train_one_epoch(config, model, train_dataloader, optimizer, loss_fun):
+    model.train()
+    train_loss = 0.0
+    
+    for batch in train_dataloader:
+        inputs = batch[0].float().to(device)
+        labels = batch[1].float().to(device).long()
 
-    idx_train = 1
-    idx_val = 1
+        outputs = model(inputs)
 
-    val_loss_min = 9.9
+        loss = loss_fun(outputs, labels)
 
-    for epoch in range(epochs):
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
-        model.train()
-        train_loss = 0.0
+        train_loss += loss.item()
+    
+    return train_loss / len(train_dataloader)
+                                   
 
-        for batch in train_loader:
-
-            inputs = batch[0].float().to(device)
-            labels = batch[1].float().to(device).long()
-
-            outputs = model(inputs)
-
-            loss = criterion(outputs, labels)
-
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-
-            train_loss += loss.item()
-            
-            wandb.log({'Batch Loss/Train': loss, 'idx_train': idx_train})
-            
-            idx_train += 1
-            
-        scheduler.step()
-
-        val_loss = evaluate(model, val_loader, criterion, num_classes, idx_val)
-        idx_val += len(val_DataLoader)
-        train_loss = train_loss / len(train_loader)
-
-        wandb.log({'Loss/Train': train_loss,
-                   'Loss/Val': val_loss,
-                   'Epoch': epoch+1
-                    })
-        
-        
-        # create checkpoint variable and add important data
-        checkpoint = {
-            'epoch': epoch + 1,
-            'val_loss_min': val_loss,
-            'state_dict': model.state_dict(),
-            'optimizer': optimizer.state_dict(),
-        }
-        
-        # save checkpoint
-        save_ckp(checkpoint, False, checkpoint_path, best_model_path)
-        
-        ## TODO: save the model if validation loss has decreased
-        if val_loss <= val_loss_min:
-            print('Validation loss decreased ({:.6f} --> {:.6f}).  Saving model ...'.format(val_loss_min,val_loss))
-            # save checkpoint as best model
-            save_ckp(checkpoint, True, checkpoint_path, best_model_path)
-            val_loss_min = val_loss
-            
-    # return trained model
-    return model
-                                                  
-
-def evaluate(model, val_loader, criterion, num_classes, idx_val):
+def validate(config, model, valid_loader, loss_fun):
     
     model.eval()
-    val_loss = 0.0    
+    valid_loss = 0.0    
     
-    for batch in val_loader:
+    for batch in valid_loader:
         
         inputs = batch[0].float().to(device)
         labels = batch[1].float().to(device).long()
 
         outputs = model(inputs)
         
-        loss = criterion(outputs, labels)
+        loss = loss_fun(outputs, labels)
         
         val_loss += loss.item()
-        
-        wandb.log({'Batch Loss/Val': loss, 'idx_val': idx_val})
-        
-        idx_val += 1
         
     return val_loss / len(val_loader)
         

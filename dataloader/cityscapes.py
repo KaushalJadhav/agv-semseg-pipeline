@@ -2,6 +2,8 @@ from torch.utils.data import DataLoader, Dataset
 import torchvision.transforms as transforms
 import numpy as np
 
+from utils.preprocessing import encode_data
+
 
 # Dataset and Dataloader have to be in seperate classes 
 # We will call high level dataloader class from test/train.py which will wrap dataset class ~mradul
@@ -51,6 +53,8 @@ class CityScapesDataLoader:
           self.valid_X = np.load(self.valid_X_path)
           self.valid_y = np.load(self.valid_y_path)
 
+          # encoding labels from 35 to 19 classes 
+          encode_data(self.train_y, self.valid_y)
 
           self.train_set = CityScapes(self.train_X,
                           self.train_y, 

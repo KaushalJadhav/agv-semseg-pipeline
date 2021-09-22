@@ -26,4 +26,4 @@ def iou_accu(config, outputs, labels):
         iou[x] = ((intersection + config.SMOOTH) / (union + config.SMOOTH)).mean()
         accu[x] = ((intersection + config.SMOOTH) / (total + config.SMOOTH)).mean()
     
-    return iou, accu
+    return np_outputs, iou, accu
