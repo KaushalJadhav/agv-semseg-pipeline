@@ -67,3 +67,23 @@ def save_model_wandb(save_path):
     """
 
     wandb.save(os.path.abspath(save_path))
+
+def load_model_wandb(model_path,run_path:None):     # run_path is to be added in the config file
+    """
+    restore a model into the local run directory
+    Args:
+         filename (str): Path of saved model
+         run_path (str): Referring to the earlier run from which to pull the file, 
+                        formatted as '$ENTITY_NAME/$PROJECT_NAME/$RUN_ID'  or 
+                        '$PROJECT_NAME/$RUN_ID' 
+                        (default: current entity, project name, and run id)
+                        Default- None
+                        NOTE: resuming must be configured if run_path is not provided
+    Returns:
+         filename of the local copy
+
+    """
+    model=wandb.restore(model_path, run_path=run_path)
+    # use the "name" attribute of the returned object
+    # if your framework expects a filename, e.g. as in Keras
+    return model.name
