@@ -1,15 +1,9 @@
 import random
+import numpy as np
 
 def rand_bbox(size, lam):
-    if len(size) == 4:
-        W = size[1]
-        H = size[0]
-    elif len(size) == 3:
-        W = size[1]
-        H = size[0]
-    else:
-        raise Exception
-
+    W = size[2]
+    H = size[3]
     cut_rat = np.sqrt(1. - lam)
     cut_w = np.int(W * cut_rat)
     cut_h = np.int(H * cut_rat)

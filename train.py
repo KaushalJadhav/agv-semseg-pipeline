@@ -33,7 +33,7 @@ class Train():
         self.train_dataloader = self.dataloader.train_loader
 
         self.current_epoch = 1
-        self.min_valid_loss = 10.0
+        self.min_valid_loss = np.inf
 
         self.device = default_device()
         self.model = self.model.to(self.device)
@@ -102,7 +102,7 @@ class Train():
         if self.config.wandb: 
             print("Saving Experiment summary on WandB")
             save_model_wandb(self.config.checkpoint_path)
-            save_model_wandb
+            save_model_wandb(self.config.best_model_path)
 
             wandb_save_summary(valid_accuracy,
                                valid_iou,

@@ -15,8 +15,11 @@ def init_wandb(model, config) -> None:
     print("Wandb api key provided...")
     wandb.login(key=config.wandb_id)
 
+
+    # Not sure if config object could be logged
     wandb.init(
         name=config.experiment,
+        config=config,
         project=config.wandb_project,
         id=config.wandb_id,
         dir="./",
