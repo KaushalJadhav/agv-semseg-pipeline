@@ -56,13 +56,13 @@ class Train():
                                          self.model,
                                          self.train_dataloader,
                                          self.optimizer,
-                                         self.loss)
+                                         self.loss.forward)
             
             # Validating on the validation set
             valid_loss = validate(self.config,
                                   self.model, 
                                   self.valid_dataloader,
-                                  self.loss)
+                                  self.loss.forward)
 
             # stepping the scheduler object
             self.scheduler.step()
