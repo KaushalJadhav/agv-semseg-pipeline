@@ -19,7 +19,7 @@ def save_ckp(state, is_best, checkpoint_path, best_model_path):
 
 def load_ckp(checkpoint_fpath, model, optimizer):      
     """   
-    checkpoint_path: path to save checkpoint 
+    checkpoint_path: path to load checkpoint 
     model: model that we want to load checkpoint parameters into                                               
     optimizer: optimizer we defined in previous training 
     """

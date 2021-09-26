@@ -90,3 +90,44 @@ def load_model_wandb(model_path,run_path:None):     # run_path is to be added in
     # use the "name" attribute of the returned object
     # if your framework expects a filename, e.g. as in Keras
     return model.name
+
+# Sving and loading using wandb.artifacts
+
+def save_wandb_artifact(wandb_run,model_name,checkpoint_path,is_best=False):
+# model_name can be taken from config. It is the name of the artifact 
+# both the paths can be saved
+    model_artifact = wandb.Artifact(
+        model_name, 
+        type="model",  
+ # type is used to differentiate kinds of artifacts, used for organizational purposes.
+ # For eg. "dataset", "model","result"
+        description="trained Enet model",
+ # The description is displayed next to the artifact version in the UI
+ # Did not understand the role of metadata
+        metadata=dict(wandb.config))
+    if is_best:
+        model_artifact.add_dir('best_path')
+    else:
+        model_artifact.add_dir('last_checkpoint_path')
+    if is_best:
+        model_artifact.add_file(checkpoint_path,name='best_path/'+checkpoint_path)
+# NOTE- THE METRIC NAME HAS TO BE UPDATED
+        wandb_run.log_artifact(artifact, aliases=['best'+metric_name])
+    else:
+        model_artifact.add_file(checkpoint_path,name='last_checkpoint_path/'+checkpoint_path)
+        wandb_run.log_artifact(artifact, aliases=['latest'])
+
+def load_wandb_artifact(wandb_run,model_name,is_best=False,root_download_path=None):
+    if is_best:
+# NOTE- THE METRIC NAME HAS TO BE UPDATED        
+        artifact = wandb_run.use_artifact(model_name+':'+'best'+metric_name)
+        datadir = artifact.download(root=root_download_path)
+        #datadir is a path to a directory containing the artifact’s contents. 
+        return datadir # NEEDS TO BE CHECKED
+    else:
+        artifact = wandb_run.use_artifact(model_name+':latest)
+        datadir = artifact.download(root=root_download_path)
+        #datadir is a path to a directory containing the artifact’s contents. 
+        return datadir # NEEDS TO BE CHECKED
+
+    
