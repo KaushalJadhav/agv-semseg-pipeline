@@ -106,6 +106,6 @@ class Train():
                                valid_accuracy,
                                valid_results,
                                self.dataloader.valid_X,
-                               self.dataloader.valid_y))
+                               self.dataloader.valid_y)
 
         print("Experminent is Finished...")
