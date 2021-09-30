@@ -3,9 +3,9 @@ import numpy as np
 
 from dataloader.cityscapes import CityScapesDataLoader
 from dataloader.cityscapes_cutmix import CityScapesCutmixDataLoader
-# Call dataloader class from dataloader package and initialize them wherever needed ~mradul2
+
 import torch.optim as optim
-# import torch.nn as nn          #We wll make this modular by adding these either to config
+
 from models.enet import ENet
 
 from utils.device import default_device
@@ -13,7 +13,7 @@ from utils.trainer import train_one_epoch, validate
 from utils.tester import final_metrics
 from utils.wandb_utils import init_wandb, wandb_log, wandb_save_summary, save_model_wandb
 from utils.saving import save_ckp, load_ckp, make_checkpoint_dict
-# wandb 
+
 
 class Train():
     def __init__(self, config):
@@ -45,7 +45,7 @@ class Train():
             init_wandb(self.model, self.config)
 
     def forward(self):
-        # So below code calls training loop and validation loop for each epach and: ~mradul2
+        # So below code calls training loop and validation loop for each epach and:
         # log losses on wandb, save models, step the scheduler 
 
         # Training loop called
@@ -81,16 +81,12 @@ class Train():
                 wandb_log(train_loss, valid_loss, self.current_epoch)
 
 
-        # trainer(epochs=self.epochs, model=self.model, train_loader=self.train_dataloader, val_loader=self.valid_dataloader, criterion=self.loss, optimizer=self.optimizer, scheduler=self.scheduler, checkpoint_path, best_model_path)
-        #Here still we have to fix the path to where we log the data
-
 
     def summarize(self):
         """
             Summarize the training process
             will save the final summaries on wanb, save final models on wanb
             log obtained iou, acuracy and some result images on wanb and finally finish the run
-            ~mradul2 
         """
 
         train_accuracy, valid_accuracy, train_iou, valid_iou, valid_results = final_metrics(self.config,

@@ -50,5 +50,3 @@ def validate(config, model, valid_loader, loss_fun):
         val_loss += loss.item()
         
     return val_loss / len(val_loader)
-        
-        
