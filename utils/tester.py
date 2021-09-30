@@ -1,4 +1,4 @@
-from metric import iou_accu
+from utils.metric import iou_accu
 import numpy as np
 
 # These are utility functions, we need not to initialize any dataloader or model here (ENet or Cityscapes)

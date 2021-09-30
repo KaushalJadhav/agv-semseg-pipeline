@@ -2,7 +2,6 @@ import torch
 import numpy as np 
 
 from dataloader.cityscapes import CityScapesDataLoader
-from dataloader.cityscapes_cutmix import CityScapesCutmixDataLoader
 
 import torch.optim as optim
 
@@ -13,7 +12,7 @@ from utils.trainer import train_one_epoch, validate
 from utils.tester import final_metrics
 from utils.wandb_utils import init_wandb, wandb_log, wandb_save_summary, save_model_wandb
 from utils.saving import save_ckp, load_ckp, make_checkpoint_dict
-
+from utils.losses import CrossEntropyLoss
 
 class Train():
     def __init__(self, config):
@@ -56,13 +55,15 @@ class Train():
                                          self.model,
                                          self.train_dataloader,
                                          self.optimizer,
-                                         self.loss.forward)
+                                         self.loss.forward,
+                                         self.device)
             
             # Validating on the validation set
             valid_loss = validate(self.config,
                                   self.model, 
                                   self.valid_dataloader,
-                                  self.loss.forward)
+                                  self.loss.forward,
+                                  self.device)
 
             # stepping the scheduler object
             self.scheduler.step()
@@ -103,7 +104,7 @@ class Train():
             wandb_save_summary(valid_accuracy,
                                valid_iou,
                                train_accuracy,
-                               valid_accuracy,
+                               train_iou,
                                valid_results,
                                self.dataloader.valid_X,
                                self.dataloader.valid_y)

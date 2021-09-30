@@ -1,4 +1,5 @@
 from utils.scripts import class_labels 
+import numpy as np
 
 def encode(mask):
     res = np.zeros_like(mask)

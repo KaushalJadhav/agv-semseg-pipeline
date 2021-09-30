@@ -3,7 +3,7 @@ import numpy as np
 import torch
 from utils.augmentation import rand_bbox
 
-def train_one_epoch(config, model, train_dataloader, optimizer, loss_fun):
+def train_one_epoch(config, model, train_dataloader, optimizer, loss_fun, device):
     model.train()
     train_loss = 0.0
     
@@ -12,7 +12,7 @@ def train_one_epoch(config, model, train_dataloader, optimizer, loss_fun):
         labels = batch[1].float().to(device).long()
 
         r = np.random.rand(1)
-        if self.config.cutmix and r < config.cutmix_prob:
+        if config.cutmix and r < config.cutmix_prob:
             lam = np.random.beta(config.beta_cutmix, config.beta_cutmix)
             rand_index = torch.randperm(inputs.size()[0]).cuda()
 
@@ -33,7 +33,7 @@ def train_one_epoch(config, model, train_dataloader, optimizer, loss_fun):
     return train_loss / len(train_dataloader)
                                    
 
-def validate(config, model, valid_loader, loss_fun):
+def validate(config, model, valid_loader, loss_fun, device):
     
     model.eval()
     valid_loss = 0.0    

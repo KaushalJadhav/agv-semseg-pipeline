@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch
 
 class InitialBlock(nn.Module):
     """The initial block is composed of two branches:
@@ -519,7 +520,7 @@ class ENet(nn.Module):
         self.regular3_0 = RegularBottleneck(
             128, padding=1, dropout_prob=0.1, relu=config.encoder_relu)
         self.dilated3_1 = RegularBottleneck(
-            128, dilation=2, padding=2, dropout_prob=0.1, relu=config.config.encoder_relu)
+            128, dilation=2, padding=2, dropout_prob=0.1, relu=config.encoder_relu)
         self.asymmetric3_2 = RegularBottleneck(
             128,
             kernel_size=5,
@@ -558,7 +559,7 @@ class ENet(nn.Module):
             16, padding=1, dropout_prob=0.1, relu=config.decoder_relu)
         self.transposed_conv = nn.ConvTranspose2d(
             16,
-            config.config.num_classes,
+            config.num_classes,
             kernel_size=3,
             stride=2,
             padding=1,

@@ -18,7 +18,7 @@ def init_wandb(model, config) -> None:
 
     # Not sure if config object could be logged
     wandb.init(
-        name=config.experiment,
+        name=config.exp_name,
         config=config,
         project=config.wandb_project,
         id=config.wandb_id,
@@ -47,7 +47,7 @@ def wandb_log(train_loss, val_loss, epoch):
 def wandb_save_summary(valid_accuracy,
                        valid_iou,
                        train_accuracy,
-                       valid_accuracy,
+                       train_iou,
                        valid_results,
                        valid_X,
                        valid_y):
@@ -125,7 +125,8 @@ def load_wandb_artifact(wandb_run,model_name,is_best=False,root_download_path=No
         #datadir is a path to a directory containing the artifact’s contents. 
         return datadir # NEEDS TO BE CHECKED
     else:
-        artifact = wandb_run.use_artifact(model_name+':latest)
+        # There is some error in the following line:
+        # artifact = wandb_run.use_artifact(model_name+':latest)
         datadir = artifact.download(root=root_download_path)
         #datadir is a path to a directory containing the artifact’s contents. 
         return datadir # NEEDS TO BE CHECKED
