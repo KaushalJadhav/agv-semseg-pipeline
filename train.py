@@ -17,7 +17,11 @@ from utils.losses import CrossEntropyLoss
 class Train():
     def __init__(self, config):
         self.config = config
+
+        print("Loading ENet Model...")
         self.model = ENet(self.config)
+
+        print("Loading Dataloaders...")
         self.dataloader = CityScapesDataLoader(self.config)
         self.loss = CrossEntropyLoss(self.config)
 
@@ -35,6 +39,8 @@ class Train():
         self.min_valid_loss = np.inf
 
         self.device = default_device()
+        print("Default device: ", self.device)
+
         self.model = self.model.to(self.device)
         self.loss = self.loss.to(self.device)
 

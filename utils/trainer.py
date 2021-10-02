@@ -47,6 +47,6 @@ def validate(config, model, valid_loader, loss_fun, device):
         
         loss = loss_fun(outputs, labels)
         
-        val_loss += loss.item()
+        valid_loss += loss.item()
         
-    return val_loss / len(val_loader)
+    return valid_loss / len(valid_loader)

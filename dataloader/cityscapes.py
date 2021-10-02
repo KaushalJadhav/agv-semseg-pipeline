@@ -50,11 +50,18 @@ class CityScapesDataLoader:
           self.train_X = np.load(self.config.train_X_path)
           self.train_y = np.load(self.config.train_y_path)
 
+          print("Total number of train images loaded: ", self.train_X.shape[0])
+
           self.valid_X = np.load(self.config.valid_X_path)
           self.valid_y = np.load(self.config.valid_y_path)
 
+          print("Total number of valid images loaded: ", self.valid_X.shape[0])
+
           # encoding labels from 35 to 19 classes 
-          encode_data(self.train_y, self.valid_y)
+          print("Encoding labels to 19 classes...")
+          self.train_y, self.valid_y = encode_data(self.train_y, self.valid_y)
+
+          print("Different classes present in the label: ", np.unique(self.train_y))
 
           self.train_set = CityScapes(self.train_X,
                           self.train_y, 
@@ -65,6 +72,11 @@ class CityScapesDataLoader:
 
           self.train_loader = DataLoader(self.train_set, batch_size=self.config.train_batch_size, shuffle=True)
           self.valid_loader = DataLoader(self.valid_set, batch_size=self.config.valid_batch_size, shuffle=False)
+
+          print("Size of train_loader: ", len(self.train_loader))
+          print("Size of valid_loader: ", len(self.valid_loader))
+
+
 
         elif self.config.mode == 'test':
 

@@ -452,11 +452,11 @@ class UpsamplingBottleneck(nn.Module):
 class ENet(nn.Module):
     """Generate the ENet model.
     Keyword arguments:
-    - config.num_classes (int): the number of classes to segment.
-    - config.encoder_relu (bool, optional): When ``True`` ReLU is used as the
+    - num_classes (int): the number of classes to segment.
+    - encoder_relu (bool, optional): When ``True`` ReLU is used as the
     activation function in the encoder blocks/layers; otherwise, PReLU
     is used. Default: False.
-    - config.decoder_relu (bool, optional): When ``True`` ReLU is used as the
+    - decoder_relu (bool, optional): When ``True`` ReLU is used as the
     activation function in the decoder blocks/layers; otherwise, PReLU
     is used. Default: True.
     """
