@@ -7,13 +7,13 @@ import numpy as np
 def final_metrics(config, model, train_loader, valid_loader, device):
     model.eval()
     
-    val_results = []
+    valid_results = []
 
     train_accuracy = np.zeros((config.num_classes,), dtype=float)
     train_iou = np.zeros((config.num_classes,), dtype=float)
     
-    val_accuracy = np.zeros((config.num_classes,), dtype=float)
-    val_iou = np.zeros((config.num_classes,), dtype=float)
+    valid_accuracy = np.zeros((config.num_classes,), dtype=float)
+    valid_iou = np.zeros((config.num_classes,), dtype=float)
       
     for batch in train_loader:
         
@@ -35,17 +35,17 @@ def final_metrics(config, model, train_loader, valid_loader, device):
         outputs = model(inputs)
         
         np_outputs, iou, accu = iou_accu(config, outputs, labels)
-        val_result.append(np_outputs)
+        valid_results.append(np_outputs)
         
-        val_accuracy += accu
-        val_iou += iou
+        valid_accuracy += accu
+        valid_iou += iou
         
     train_accuracy /= len(train_loader)
-    val_accuracy /= len(val_loader)
+    valid_accuracy /= len(valid_loader)
     
     train_iou /= len(train_loader)
-    val_iou /= len(val_loader)
+    valid_iou /= len(valid_loader)
 
-    val_results = np.array(val_results)
+    valid_results = np.array(valid_results)
 
-    return train_accuracy, val_accuracy, train_iou, val_iou, val_results 
+    return train_accuracy, valid_accuracy, train_iou, valid_iou, valid_results 

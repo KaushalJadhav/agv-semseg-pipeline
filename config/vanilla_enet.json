@@ -11,13 +11,13 @@
   "gamma": 0.98,
   "momentum": 0.98,
   "weight_decay": 0.0002,
-  "train_batch_size": 32,
+  "train_batch_size": 16,
   "valid_batch_size": 1,
   "test_batch_size": 1,
   "data_loader_workers": 4,
   "pin_memory": true,
   "async_loading": true,
-  "max_epoch": 20,
+  "max_epoch": 25,
   "encoder_relu": false,
   "decoder_relu": true,
   "train_X_path": "/content/drive/My Drive/cityscape/512x256/train_X.npy",
@@ -32,5 +32,6 @@
   "best_model_path": "best_model.pth",
   "wandb_project": "testing",
   "wandb_id": "xyz",
-  "wandb": true
+  "wandb": true,
+  "SMOOTH": 0.00000001
 }

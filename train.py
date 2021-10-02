@@ -53,6 +53,7 @@ class Train():
         # So below code calls training loop and validation loop for each epach and:
         # log losses on wandb, save models, step the scheduler 
 
+        print("Training started...")
         # Training loop called
         for epoch in range(self.current_epoch, self.config.max_epoch):
             self.current_epoch = epoch
@@ -71,6 +72,11 @@ class Train():
                                   self.loss.forward,
                                   self.device)
 
+            print("Epoch: ", self.current_epoch)
+            print("-- train_loss: ", train_loss)
+            print("-- valid_loss: ", valid_loss)
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
             # stepping the scheduler object
             self.scheduler.step()
 
@@ -87,7 +93,7 @@ class Train():
                 # Log losses on wandb 
                 wandb_log(train_loss, valid_loss, self.current_epoch)
 
-
+        print("Training loop ends")
 
     def summarize(self):
         """
@@ -95,12 +101,24 @@ class Train():
             will save the final summaries on wanb, save final models on wanb
             log obtained iou, acuracy and some result images on wanb and finally finish the run
         """
+        print("Experiment summary...")
 
         train_accuracy, valid_accuracy, train_iou, valid_iou, valid_results = final_metrics(self.config,
                                                                          self.model,
-                                                                         self.train_loader,
-                                                                         self.valid_loader,
+                                                                         self.train_dataloader,
+                                                                         self.valid_dataloader,
                                                                          self.device)
+
+        
+        print("Mean Train Accuracy: ", train_accuracy.mean())
+        print("Classwise Train Accuracy: ", train_accuracy)
+        print("Mean Valid Accuracy: ", valid_accuracy.mean())
+        print("Classwise Valid Accuracy: ", valid_accuracy)
+        print("Mean Train IoU: ", train_iou.mean())
+        print("Classwise Train IoU: ", train_iou)
+        print("Mean Valid IoU: ", valid_iou.mean())
+        print("Classwise Valid IoU: ", valid_iou)
+
 
         if self.config.wandb: 
             print("Saving Experiment summary on WandB")

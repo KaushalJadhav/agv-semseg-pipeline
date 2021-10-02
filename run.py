@@ -39,7 +39,7 @@ def main():
         agent = Train(config)
         agent.forward()
         agent.summarize()
-    if config.mode=="test":
+    elif config.mode=="test":
         agent = Test(config)
         agent.forward()
     else: 

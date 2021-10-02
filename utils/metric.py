@@ -13,7 +13,7 @@ def iou_accu(config, outputs, labels):
     np_outputs = output_cvt.cpu().detach().numpy()
     np_labels = labels.cpu().detach().numpy()
 
-    np_outputs[np_labels == config.ignore_class] = config.ignore_class
+    np_outputs[np_labels == config.ignore_index] = config.ignore_index
 
     for x in range(config.num_classes):
         output_mask = (np_outputs == x)

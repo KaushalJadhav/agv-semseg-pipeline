@@ -21,8 +21,6 @@ def init_wandb(model, config) -> None:
         name=config.exp_name,
         config=config,
         project=config.wandb_project,
-        id=config.wandb_id,
-        dir="./",
     )
 
     wandb.watch(model, log="all")
