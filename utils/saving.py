@@ -1,4 +1,5 @@
 import shutil
+import torch
 
 def save_ckp(state, is_best, checkpoint_path, best_model_path):
     """
